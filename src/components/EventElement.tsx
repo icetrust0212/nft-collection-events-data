@@ -1,27 +1,21 @@
 import { utils } from "ethers";
 import { displayAddress, getFromAddress, getPrice, getTime, getToAddress } from "../helper/helper";
+import { RowType } from "../interface/interface";
 import './style.css';
 
-const {formatEther} = utils;    
 const EventElement = ({data}:PropsType) => {
     return (
         <div className="item-wrapper">
-            <span>{getPrice(data)}</span>
-            <span>{data.quantity || 'undefined'}</span>
-            <span title={getFromAddress(data)}>{displayAddress(getFromAddress(data))}</span>
-            <span title={getToAddress(data)}>{displayAddress(getToAddress(data))}</span>
-            <span>{getTime(data)}</span>
+            <span>{data.price}</span>
+            <span>{data.quantity}</span>
+            <span title={data.from_address}>{displayAddress(data.from_address)}</span>
+            <span title={data.to_address}>{displayAddress(data.to_address)}</span>
+            <span>{data.timestamp}</span>
         </div>
     )
 }
 
 interface PropsType {
-    data: {
-        price: string | number,
-        quantity: string,
-        from: string,
-        to: string,
-        time: string | number
-    }
+    data: RowType
 }
 export default EventElement;
